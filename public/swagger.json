@@ -1461,6 +1461,252 @@
         }
       }
     },
+    "/api/marketing-content/{id}": {
+      "get": {
+        "summary": "Get marketing content by ID",
+        "description": "Retrieve a specific marketing content item",
+        "tags": [
+          "Marketing Content"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Content ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content details"
+          },
+          "404": {
+            "description": "Content not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update marketing content",
+        "description": "Update a marketing content item",
+        "tags": [
+          "Marketing Content"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Content updated"
+          },
+          "404": {
+            "description": "Content not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete marketing content",
+        "description": "Delete a marketing content item",
+        "tags": [
+          "Marketing Content"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Content deleted"
+          },
+          "404": {
+            "description": "Content not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/marketing-content": {
+      "get": {
+        "summary": "Get all marketing content",
+        "description": "Retrieve all marketing content items with pagination and filtering",
+        "tags": [
+          "Marketing Content"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Maximum number of items to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of items to skip"
+          },
+          {
+            "in": "query",
+            "name": "content_type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by content type"
+          },
+          {
+            "in": "query",
+            "name": "content_status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by content status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of marketing content items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new marketing content",
+        "description": "Create a new marketing content item",
+        "tags": [
+          "Marketing Content"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "content_id",
+                  "content_title",
+                  "content_type",
+                  "author_name",
+                  "content_status"
+                ],
+                "properties": {
+                  "content_id": {
+                    "type": "string"
+                  },
+                  "content_title": {
+                    "type": "string"
+                  },
+                  "content_type": {
+                    "type": "string"
+                  },
+                  "author_name": {
+                    "type": "string"
+                  },
+                  "created_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "published_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "word_count": {
+                    "type": "integer"
+                  },
+                  "seo_optimized": {
+                    "type": "boolean"
+                  },
+                  "content_status": {
+                    "type": "string"
+                  },
+                  "content_format": {
+                    "type": "string"
+                  },
+                  "views_count": {
+                    "type": "integer"
+                  },
+                  "engagement_rate": {
+                    "type": "integer"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Content created successfully"
+          },
+          "400": {
+            "description": "Invalid request"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/marketing-videos/{id}": {
       "get": {
         "summary": "Get a marketing video by ID",
@@ -1714,6 +1960,250 @@
           },
           "400": {
             "description": "Invalid request data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/marketing-whatsapp/{id}": {
+      "get": {
+        "summary": "Get WhatsApp campaign by ID",
+        "description": "Retrieve a specific WhatsApp campaign",
+        "tags": [
+          "Marketing WhatsApp"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Campaign ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Campaign details"
+          },
+          "404": {
+            "description": "Campaign not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update WhatsApp campaign",
+        "description": "Update a WhatsApp campaign",
+        "tags": [
+          "Marketing WhatsApp"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Campaign updated"
+          },
+          "404": {
+            "description": "Campaign not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete WhatsApp campaign",
+        "description": "Delete a WhatsApp campaign",
+        "tags": [
+          "Marketing WhatsApp"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Campaign deleted"
+          },
+          "404": {
+            "description": "Campaign not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/marketing-whatsapp": {
+      "get": {
+        "summary": "Get all WhatsApp campaigns",
+        "description": "Retrieve all WhatsApp marketing campaigns with pagination and filtering",
+        "tags": [
+          "Marketing WhatsApp"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Maximum number of items to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of items to skip"
+          },
+          {
+            "in": "query",
+            "name": "message_type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by message type"
+          },
+          {
+            "in": "query",
+            "name": "delivery_status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by delivery status"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of WhatsApp campaigns",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create new WhatsApp campaign",
+        "description": "Create a new WhatsApp marketing campaign",
+        "tags": [
+          "Marketing WhatsApp"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "message_id",
+                  "campaign_name",
+                  "message_type",
+                  "delivery_status"
+                ],
+                "properties": {
+                  "message_id": {
+                    "type": "string"
+                  },
+                  "campaign_name": {
+                    "type": "string"
+                  },
+                  "send_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "recipient_count": {
+                    "type": "integer"
+                  },
+                  "open_rate": {
+                    "type": "integer"
+                  },
+                  "click_rate": {
+                    "type": "integer"
+                  },
+                  "message_type": {
+                    "type": "string"
+                  },
+                  "media_attached": {
+                    "type": "boolean"
+                  },
+                  "language_used": {
+                    "type": "string"
+                  },
+                  "opt_out_count": {
+                    "type": "integer"
+                  },
+                  "delivery_status": {
+                    "type": "string"
+                  },
+                  "sender_name": {
+                    "type": "string"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Campaign created successfully"
+          },
+          "400": {
+            "description": "Invalid request"
           },
           "500": {
             "description": "Server error"

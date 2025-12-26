@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { FileText, BookOpen, Globe, Tag, BarChart, FileSearch, Search, Video, Headphones, Target, Share2 } from 'lucide-react';
+import { FileText, BookOpen, Globe, Tag, BarChart, FileSearch, Search, Video, Headphones, Target, Share2, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
 
 export default function DashboardPage() {
@@ -68,6 +68,20 @@ export default function DashboardPage() {
       icon: Share2,
       href: '/social-campaigns',
       color: 'text-violet-600'
+    },
+    {
+      title: 'Marketing Content',
+      description: 'Manage marketing content and publications',
+      icon: FileText,
+      href: '/marketing-content',
+      color: 'text-emerald-600'
+    },
+    {
+      title: 'WhatsApp Campaigns',
+      description: 'Manage WhatsApp marketing campaigns',
+      icon: MessageSquare,
+      href: '/marketing-whatsapp',
+      color: 'text-lime-600'
     },
     {
       title: 'Coupons',

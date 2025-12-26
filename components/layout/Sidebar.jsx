@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { LayoutDashboard, TrendingUp, Globe, Ticket, BarChart3, FileText, BookOpen, Menu, X, Video, Headphones, Target, Share2 } from 'lucide-react';
+import { LayoutDashboard, TrendingUp, Globe, Ticket, BarChart3, FileText, BookOpen, Menu, X, Video, Headphones, Target, Share2, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
@@ -21,6 +21,8 @@ const navigation = [
   { name: 'EBooks', href: '/ebooks', icon: BookOpen },
   { name: 'Marketing Videos', href: '/marketing-videos', icon: Video },
   { name: 'Marketing Audios', href: '/marketing-audios', icon: Headphones },
+  { name: 'Marketing Content', href: '/marketing-content', icon: FileText },
+  { name: 'WhatsApp Campaigns', href: '/marketing-whatsapp', icon: MessageSquare },
 ];
 
 export default function Sidebar() {
