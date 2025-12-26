@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { LayoutDashboard, TrendingUp, Globe, Ticket, BarChart3, FileText, Menu, X } from 'lucide-react';
+import { LayoutDashboard, TrendingUp, Globe, Ticket, BarChart3, FileText, BookOpen, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 
@@ -14,6 +14,9 @@ const navigation = [
   { name: 'Coupons', href: '/coupons', icon: Ticket },
   { name: 'Analytics', href: '/analytics', icon: BarChart3 },
   { name: 'Audit Logs', href: '/audit-logs', icon: FileText },
+  { name: 'Blogs', href: '/blogs', icon: FileText },
+  { name: 'White Papers', href: '/white-papers', icon: FileText },
+  { name: 'EBooks', href: '/ebooks', icon: BookOpen },
 ];
 
 export default function Sidebar() {

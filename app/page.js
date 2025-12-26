@@ -1,5 +1,94 @@
-import { redirect } from 'next/navigation';
+'use client';
 
-export default function HomePage() {
-  redirect('/login');
+import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { FileText, BookOpen, Globe, Tag, BarChart, FileSearch, Search } from 'lucide-react';
+import Link from 'next/link';
+
+export default function DashboardPage() {
+  const workflows = [
+    {
+      title: 'SEO Campaigns',
+      description: 'Manage SEO campaigns and optimization',
+      icon: Search,
+      href: '/seo-campaigns',
+      color: 'text-blue-600'
+    },
+    {
+      title: 'Websites',
+      description: 'Manage websites and web properties',
+      icon: Globe,
+      href: '/websites',
+      color: 'text-green-600'
+    },
+    {
+      title: 'Blogs',
+      description: 'Manage marketing blogs and content',
+      icon: FileText,
+      href: '/blogs',
+      color: 'text-purple-600'
+    },
+    {
+      title: 'White Papers',
+      description: 'Manage white papers and research',
+      icon: FileText,
+      href: '/white-papers',
+      color: 'text-indigo-600'
+    },
+    {
+      title: 'EBooks',
+      description: 'Manage digital ebooks',
+      icon: BookOpen,
+      href: '/ebooks',
+      color: 'text-pink-600'
+    },
+    {
+      title: 'Coupons',
+      description: 'Manage promotional coupons and offers',
+      icon: Tag,
+      href: '/coupons',
+      color: 'text-orange-600'
+    },
+    {
+      title: 'Analytics',
+      description: 'View analytics and insights',
+      icon: BarChart,
+      href: '/analytics',
+      color: 'text-cyan-600'
+    },
+    {
+      title: 'Audit Logs',
+      description: 'View system audit logs and activity',
+      icon: FileSearch,
+      href: '/audit-logs',
+      color: 'text-gray-600'
+    }
+  ];
+
+  return (
+    <div className="p-8">
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
+        <p className="text-gray-600">Manage your workflows and content</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {workflows.map((workflow) => {
+          const Icon = workflow.icon;
+          return (
+            <Link key={workflow.href} href={workflow.href}>
+              <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
+                <CardHeader>
+                  <div className="flex items-center gap-3 mb-2">
+                    <Icon className={`h-6 w-6 ${workflow.color}`} />
+                    <CardTitle className="text-xl">{workflow.title}</CardTitle>
+                  </div>
+                  <CardDescription>{workflow.description}</CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
+          );
+        })}
+      </div>
+    </div>
+  );
 }

@@ -213,6 +213,249 @@
         }
       }
     },
+    "/api/blogs/{id}": {
+      "get": {
+        "summary": "Get a single blog",
+        "description": "Retrieve details of a specific blog by ID",
+        "tags": [
+          "Blogs"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Blog ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blog details retrieved successfully"
+          },
+          "404": {
+            "description": "Blog not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a blog",
+        "description": "Update an existing blog's information",
+        "tags": [
+          "Blogs"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Blog ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Blog updated successfully"
+          },
+          "404": {
+            "description": "Blog not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a blog",
+        "description": "Remove a blog from the database",
+        "tags": [
+          "Blogs"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Blog ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blog deleted successfully"
+          },
+          "404": {
+            "description": "Blog not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/blogs": {
+      "get": {
+        "summary": "Get all blogs",
+        "description": "Retrieve a list of all marketing blogs with optional filtering and pagination",
+        "tags": [
+          "Blogs"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by blog status"
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by category"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            },
+            "description": "Maximum number of results"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of results to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of blogs retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new blog",
+        "description": "Add a new marketing blog to the database",
+        "tags": [
+          "Blogs"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "blog_title",
+                  "author_name",
+                  "category",
+                  "blog_status"
+                ],
+                "properties": {
+                  "blog_title": {
+                    "type": "string"
+                  },
+                  "author_name": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "tags": {
+                    "type": "string"
+                  },
+                  "published_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "word_count": {
+                    "type": "integer"
+                  },
+                  "read_time_minutes": {
+                    "type": "integer"
+                  },
+                  "blog_status": {
+                    "type": "string"
+                  },
+                  "seo_score": {
+                    "type": "integer"
+                  },
+                  "comments_count": {
+                    "type": "integer"
+                  },
+                  "social_shares_count": {
+                    "type": "integer"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Blog created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/coupons/{id}/redeem": {
       "post": {
         "summary": "Redeem a coupon",
@@ -305,6 +548,233 @@
         "responses": {
           "201": {
             "description": "Coupon created"
+          }
+        }
+      }
+    },
+    "/api/ebooks/{id}": {
+      "get": {
+        "summary": "Get a single ebook",
+        "description": "Retrieve details of a specific ebook by ID",
+        "tags": [
+          "EBooks"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ebook ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ebook details retrieved successfully"
+          },
+          "404": {
+            "description": "Ebook not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an ebook",
+        "description": "Update an existing ebook's information",
+        "tags": [
+          "EBooks"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ebook ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ebook updated successfully"
+          },
+          "404": {
+            "description": "Ebook not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an ebook",
+        "description": "Remove an ebook from the database",
+        "tags": [
+          "EBooks"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Ebook ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ebook deleted successfully"
+          },
+          "404": {
+            "description": "Ebook not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/ebooks": {
+      "get": {
+        "summary": "Get all ebooks",
+        "description": "Retrieve a list of all marketing ebooks with optional filtering and pagination",
+        "tags": [
+          "EBooks"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "genre",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by genre"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by language"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            },
+            "description": "Maximum number of results"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of results to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of ebooks retrieved successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new ebook",
+        "description": "Add a new marketing ebook to the database",
+        "tags": [
+          "EBooks"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "title",
+                  "author_name",
+                  "genre"
+                ],
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "author_name": {
+                    "type": "string"
+                  },
+                  "genre": {
+                    "type": "string"
+                  },
+                  "release_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "format_type": {
+                    "type": "string"
+                  },
+                  "total_pages": {
+                    "type": "integer"
+                  },
+                  "downloads_count": {
+                    "type": "integer"
+                  },
+                  "language": {
+                    "type": "string"
+                  },
+                  "preview_available": {
+                    "type": "boolean"
+                  },
+                  "ratings_average": {
+                    "type": "integer"
+                  },
+                  "feedback_summary": {
+                    "type": "string"
+                  },
+                  "usage_permission": {
+                    "type": "string"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Ebook created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }
@@ -611,6 +1081,231 @@
         "responses": {
           "201": {
             "description": "Website created"
+          }
+        }
+      }
+    },
+    "/api/white-papers/{id}": {
+      "get": {
+        "summary": "Get a single white paper",
+        "description": "Retrieve details of a specific white paper by ID",
+        "tags": [
+          "White Papers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "White paper ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "White paper details retrieved successfully"
+          },
+          "404": {
+            "description": "White paper not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a white paper",
+        "description": "Update an existing white paper's information",
+        "tags": [
+          "White Papers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "White paper ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "White paper updated successfully"
+          },
+          "404": {
+            "description": "White paper not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a white paper",
+        "description": "Remove a white paper from the database",
+        "tags": [
+          "White Papers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "White paper ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "White paper deleted successfully"
+          },
+          "404": {
+            "description": "White paper not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/white-papers": {
+      "get": {
+        "summary": "Get all white papers",
+        "description": "Retrieve a list of all marketing white papers with optional filtering and pagination",
+        "tags": [
+          "White Papers"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by usage status"
+          },
+          {
+            "in": "query",
+            "name": "department",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by department"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 100
+            },
+            "description": "Maximum number of results"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of results to skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of white papers retrieved successfully"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new white paper",
+        "description": "Add a new marketing white paper to the database",
+        "tags": [
+          "White Papers"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "title",
+                  "author_name",
+                  "department",
+                  "usage_status"
+                ],
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "author_name": {
+                    "type": "string"
+                  },
+                  "department": {
+                    "type": "string"
+                  },
+                  "publication_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "version": {
+                    "type": "string"
+                  },
+                  "total_pages": {
+                    "type": "integer"
+                  },
+                  "downloads_count": {
+                    "type": "integer"
+                  },
+                  "target_audience": {
+                    "type": "string"
+                  },
+                  "keywords": {
+                    "type": "string"
+                  },
+                  "usage_status": {
+                    "type": "string"
+                  },
+                  "feedback_received": {
+                    "type": "string"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "White paper created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Server error"
           }
         }
       }
