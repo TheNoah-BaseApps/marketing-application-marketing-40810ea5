@@ -955,6 +955,527 @@
         }
       }
     },
+    "/api/marketing-audios/{id}": {
+      "get": {
+        "summary": "Get a marketing audio by ID",
+        "description": "Retrieve a single marketing audio by its ID",
+        "tags": [
+          "Marketing Audios"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Audio ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Marketing audio details"
+          },
+          "404": {
+            "description": "Audio not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a marketing audio",
+        "description": "Update an existing marketing audio",
+        "tags": [
+          "Marketing Audios"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "audio_title": {
+                    "type": "string"
+                  },
+                  "audio_type": {
+                    "type": "string"
+                  },
+                  "duration_seconds": {
+                    "type": "integer"
+                  },
+                  "listeners_count": {
+                    "type": "integer"
+                  },
+                  "feedback_score": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Audio updated successfully"
+          },
+          "404": {
+            "description": "Audio not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a marketing audio",
+        "description": "Delete a marketing audio by ID",
+        "tags": [
+          "Marketing Audios"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Audio deleted successfully"
+          },
+          "404": {
+            "description": "Audio not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/marketing-audios": {
+      "get": {
+        "summary": "Get all marketing audios",
+        "description": "Retrieve a list of all marketing audio content with pagination and filtering",
+        "tags": [
+          "Marketing Audios"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "Items per page"
+          },
+          {
+            "in": "query",
+            "name": "audio_type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by audio type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of marketing audios",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new marketing audio",
+        "description": "Create a new marketing audio entry",
+        "tags": [
+          "Marketing Audios"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "audio_title",
+                  "audio_type"
+                ],
+                "properties": {
+                  "audio_title": {
+                    "type": "string"
+                  },
+                  "audio_type": {
+                    "type": "string"
+                  },
+                  "duration_seconds": {
+                    "type": "integer"
+                  },
+                  "recorded_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "release_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "format_type": {
+                    "type": "string"
+                  },
+                  "published_on": {
+                    "type": "string"
+                  },
+                  "listeners_count": {
+                    "type": "integer"
+                  },
+                  "feedback_score": {
+                    "type": "integer"
+                  },
+                  "created_by": {
+                    "type": "string"
+                  },
+                  "licensing_info": {
+                    "type": "string"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Audio created successfully"
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/marketing-videos/{id}": {
+      "get": {
+        "summary": "Get a marketing video by ID",
+        "description": "Retrieve a single marketing video by its ID",
+        "tags": [
+          "Marketing Videos"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Video ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Marketing video details"
+          },
+          "404": {
+            "description": "Video not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a marketing video",
+        "description": "Update an existing marketing video",
+        "tags": [
+          "Marketing Videos"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "video_title": {
+                    "type": "string"
+                  },
+                  "duration_seconds": {
+                    "type": "integer"
+                  },
+                  "video_type": {
+                    "type": "string"
+                  },
+                  "views_count": {
+                    "type": "integer"
+                  },
+                  "likes_count": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Video updated successfully"
+          },
+          "404": {
+            "description": "Video not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a marketing video",
+        "description": "Delete a marketing video by ID",
+        "tags": [
+          "Marketing Videos"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Video deleted successfully"
+          },
+          "404": {
+            "description": "Video not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/marketing-videos": {
+      "get": {
+        "summary": "Get all marketing videos",
+        "description": "Retrieve a list of all marketing videos with pagination and filtering",
+        "tags": [
+          "Marketing Videos"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "Items per page"
+          },
+          {
+            "in": "query",
+            "name": "video_type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by video type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of marketing videos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "limit": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new marketing video",
+        "description": "Create a new marketing video entry",
+        "tags": [
+          "Marketing Videos"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "video_title",
+                  "video_type"
+                ],
+                "properties": {
+                  "video_title": {
+                    "type": "string"
+                  },
+                  "duration_seconds": {
+                    "type": "integer"
+                  },
+                  "upload_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "video_type": {
+                    "type": "string"
+                  },
+                  "video_format": {
+                    "type": "string"
+                  },
+                  "views_count": {
+                    "type": "integer"
+                  },
+                  "likes_count": {
+                    "type": "integer"
+                  },
+                  "platform_distributed_on": {
+                    "type": "string"
+                  },
+                  "created_by": {
+                    "type": "string"
+                  },
+                  "subtitles_available": {
+                    "type": "boolean"
+                  },
+                  "performance_rating": {
+                    "type": "integer"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Video created successfully"
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/seo/{id}": {
       "get": {
         "summary": "Get SEO campaign by ID",

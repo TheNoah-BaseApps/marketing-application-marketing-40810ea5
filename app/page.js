@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { FileText, BookOpen, Globe, Tag, BarChart, FileSearch, Search } from 'lucide-react';
+import { FileText, BookOpen, Globe, Tag, BarChart, FileSearch, Search, Video, Headphones } from 'lucide-react';
 import Link from 'next/link';
 
 export default function DashboardPage() {
@@ -40,6 +40,20 @@ export default function DashboardPage() {
       icon: BookOpen,
       href: '/ebooks',
       color: 'text-pink-600'
+    },
+    {
+      title: 'Marketing Videos',
+      description: 'Manage video content and campaigns',
+      icon: Video,
+      href: '/marketing-videos',
+      color: 'text-red-600'
+    },
+    {
+      title: 'Marketing Audios',
+      description: 'Manage audio content and podcasts',
+      icon: Headphones,
+      href: '/marketing-audios',
+      color: 'text-yellow-600'
     },
     {
       title: 'Coupons',
