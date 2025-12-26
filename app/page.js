@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { FileText, BookOpen, Globe, Tag, BarChart, FileSearch, Search, Video, Headphones } from 'lucide-react';
+import { FileText, BookOpen, Globe, Tag, BarChart, FileSearch, Search, Video, Headphones, Target, Share2 } from 'lucide-react';
 import Link from 'next/link';
 
 export default function DashboardPage() {
@@ -54,6 +54,20 @@ export default function DashboardPage() {
       icon: Headphones,
       href: '/marketing-audios',
       color: 'text-yellow-600'
+    },
+    {
+      title: 'Ad Campaigns',
+      description: 'Manage advertising campaigns and performance',
+      icon: Target,
+      href: '/ad-campaigns',
+      color: 'text-teal-600'
+    },
+    {
+      title: 'Social Campaigns',
+      description: 'Manage social media campaigns',
+      icon: Share2,
+      href: '/social-campaigns',
+      color: 'text-violet-600'
     },
     {
       title: 'Coupons',
