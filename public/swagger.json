@@ -1024,6 +1024,277 @@
         }
       }
     },
+    "/api/email-analysis/{id}": {
+      "get": {
+        "summary": "Get email analysis by ID",
+        "description": "Retrieve a specific email analysis record by ID",
+        "tags": [
+          "Email Analysis"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Email analysis record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Email analysis record retrieved successfully"
+          },
+          "404": {
+            "description": "Email analysis record not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update email analysis",
+        "description": "Update an existing email analysis record",
+        "tags": [
+          "Email Analysis"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Email analysis record ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "campaign_name": {
+                    "type": "string"
+                  },
+                  "email_subject_line": {
+                    "type": "string"
+                  },
+                  "recipient_count": {
+                    "type": "integer"
+                  },
+                  "open_rate_percent": {
+                    "type": "integer"
+                  },
+                  "click_through_rate": {
+                    "type": "integer"
+                  },
+                  "engagement_score": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email analysis updated successfully"
+          },
+          "404": {
+            "description": "Email analysis not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete email analysis",
+        "description": "Delete an email analysis record",
+        "tags": [
+          "Email Analysis"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Email analysis record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Email analysis deleted successfully"
+          },
+          "404": {
+            "description": "Email analysis not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/email-analysis": {
+      "get": {
+        "summary": "Get all email analysis records",
+        "description": "Retrieve all email analysis records with pagination and filtering",
+        "tags": [
+          "Email Analysis"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number for pagination"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            },
+            "description": "Number of records per page"
+          },
+          {
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search by campaign name or email subject"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of email analysis records retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new email analysis record",
+        "description": "Create a new email analysis record with campaign performance data",
+        "tags": [
+          "Email Analysis"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email_analysis_id",
+                  "campaign_id",
+                  "campaign_name",
+                  "email_subject_line"
+                ],
+                "properties": {
+                  "email_analysis_id": {
+                    "type": "string"
+                  },
+                  "campaign_id": {
+                    "type": "string"
+                  },
+                  "campaign_name": {
+                    "type": "string"
+                  },
+                  "email_subject_line": {
+                    "type": "string"
+                  },
+                  "send_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "recipient_count": {
+                    "type": "integer"
+                  },
+                  "open_rate_percent": {
+                    "type": "integer"
+                  },
+                  "click_through_rate": {
+                    "type": "integer"
+                  },
+                  "bounce_rate_percent": {
+                    "type": "integer"
+                  },
+                  "unsubscribe_rate": {
+                    "type": "integer"
+                  },
+                  "spam_complaint_count": {
+                    "type": "integer"
+                  },
+                  "most_clicked_link": {
+                    "type": "string"
+                  },
+                  "device_breakdown": {
+                    "type": "string"
+                  },
+                  "time_to_open_average": {
+                    "type": "integer"
+                  },
+                  "engagement_score": {
+                    "type": "integer"
+                  },
+                  "analysis_generated_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Email analysis record created successfully"
+          },
+          "400": {
+            "description": "Invalid request data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/email-marketing/{id}": {
       "get": {
         "summary": "Get email marketing campaign by ID",

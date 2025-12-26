@@ -24,6 +24,7 @@ const navigation = [
   { name: 'Marketing Content', href: '/marketing-content', icon: FileText },
   { name: 'WhatsApp Campaigns', href: '/marketing-whatsapp', icon: MessageSquare },
   { name: 'Email Marketing', href: '/email-marketing', icon: Mail },
+  { name: 'Email Analysis', href: '/email-analysis', icon: BarChart3 },
   { name: 'Offers', href: '/offers', icon: Tag },
 ];
 

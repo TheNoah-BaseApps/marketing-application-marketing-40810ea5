@@ -77,6 +77,13 @@ export default function DashboardPage() {
       color: 'text-sky-600'
     },
     {
+      title: 'Email Analysis',
+      description: 'Analyze email campaign performance and metrics',
+      icon: BarChart,
+      href: '/email-analysis',
+      color: 'text-indigo-600'
+    },
+    {
       title: 'Marketing Content',
       description: 'Manage marketing content and publications',
       icon: FileText,
