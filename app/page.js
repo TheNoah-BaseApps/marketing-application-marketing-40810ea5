@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { FileText, BookOpen, Globe, Tag, BarChart, FileSearch, Search, Video, Headphones, Target, Share2, MessageSquare } from 'lucide-react';
+import { FileText, BookOpen, Globe, Tag, BarChart, FileSearch, Search, Video, Headphones, Target, Share2, MessageSquare, Mail } from 'lucide-react';
 import Link from 'next/link';
 
 export default function DashboardPage() {
@@ -70,6 +70,13 @@ export default function DashboardPage() {
       color: 'text-violet-600'
     },
     {
+      title: 'Email Marketing',
+      description: 'Manage email campaigns and performance',
+      icon: Mail,
+      href: '/email-marketing',
+      color: 'text-sky-600'
+    },
+    {
       title: 'Marketing Content',
       description: 'Manage marketing content and publications',
       icon: FileText,
@@ -89,6 +96,13 @@ export default function DashboardPage() {
       icon: Tag,
       href: '/coupons',
       color: 'text-orange-600'
+    },
+    {
+      title: 'Offers',
+      description: 'Manage promotional offers and discounts',
+      icon: Tag,
+      href: '/offers',
+      color: 'text-rose-600'
     },
     {
       title: 'Analytics',

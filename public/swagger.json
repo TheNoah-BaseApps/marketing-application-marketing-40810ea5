@@ -1024,6 +1024,245 @@
         }
       }
     },
+    "/api/email-marketing/{id}": {
+      "get": {
+        "summary": "Get email marketing campaign by ID",
+        "description": "Retrieve a single email marketing campaign by its ID",
+        "tags": [
+          "Email Marketing"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Email marketing campaign ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Email marketing campaign details"
+          },
+          "404": {
+            "description": "Email marketing campaign not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update email marketing campaign",
+        "description": "Update an existing email marketing campaign",
+        "tags": [
+          "Email Marketing"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Email marketing campaign updated successfully"
+          },
+          "404": {
+            "description": "Email marketing campaign not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete email marketing campaign",
+        "description": "Delete an email marketing campaign by ID",
+        "tags": [
+          "Email Marketing"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Email marketing campaign deleted successfully"
+          },
+          "404": {
+            "description": "Email marketing campaign not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/email-marketing": {
+      "get": {
+        "summary": "Get all email marketing campaigns",
+        "description": "Retrieve a list of all email marketing campaigns with optional filtering and pagination",
+        "tags": [
+          "Email Marketing"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Maximum number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          },
+          {
+            "in": "query",
+            "name": "email_content_type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by email content type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of email marketing campaigns",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new email marketing campaign",
+        "description": "Create a new email marketing campaign with the provided data",
+        "tags": [
+          "Email Marketing"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email_campaign_id",
+                  "subject_line",
+                  "sender_name",
+                  "email_content_type"
+                ],
+                "properties": {
+                  "email_campaign_id": {
+                    "type": "string"
+                  },
+                  "subject_line": {
+                    "type": "string"
+                  },
+                  "sender_name": {
+                    "type": "string"
+                  },
+                  "send_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "email_list_size": {
+                    "type": "integer"
+                  },
+                  "open_rate": {
+                    "type": "integer"
+                  },
+                  "click_rate": {
+                    "type": "integer"
+                  },
+                  "bounce_rate": {
+                    "type": "integer"
+                  },
+                  "unsubscribe_count": {
+                    "type": "integer"
+                  },
+                  "conversion_count": {
+                    "type": "integer"
+                  },
+                  "email_content_type": {
+                    "type": "string"
+                  },
+                  "tested_a_or_b": {
+                    "type": "boolean"
+                  },
+                  "test_winner": {
+                    "type": "string"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Email marketing campaign created successfully"
+          },
+          "400": {
+            "description": "Invalid input data"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
     "/api/example": {
       "get": {
         "summary": "Example GET endpoint",
@@ -2204,6 +2443,251 @@
           },
           "400": {
             "description": "Invalid request"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/offers/{id}": {
+      "get": {
+        "summary": "Get offer by ID",
+        "description": "Retrieve a single offer by its ID",
+        "tags": [
+          "Offers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Offer ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Offer details"
+          },
+          "404": {
+            "description": "Offer not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update offer",
+        "description": "Update an existing offer",
+        "tags": [
+          "Offers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Offer updated successfully"
+          },
+          "404": {
+            "description": "Offer not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete offer",
+        "description": "Delete an offer by ID",
+        "tags": [
+          "Offers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Offer deleted successfully"
+          },
+          "404": {
+            "description": "Offer not found"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/offers": {
+      "get": {
+        "summary": "Get all offers",
+        "description": "Retrieve a list of all marketing offers with optional filtering and pagination",
+        "tags": [
+          "Offers"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Maximum number of records to return"
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "Number of records to skip"
+          },
+          {
+            "in": "query",
+            "name": "offer_status",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by offer status"
+          },
+          {
+            "in": "query",
+            "name": "offer_type",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by offer type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of offers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new offer",
+        "description": "Create a new marketing offer with the provided data",
+        "tags": [
+          "Offers"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "offer_id",
+                  "offer_title",
+                  "offer_type",
+                  "offer_status"
+                ],
+                "properties": {
+                  "offer_id": {
+                    "type": "string"
+                  },
+                  "offer_title": {
+                    "type": "string"
+                  },
+                  "offer_type": {
+                    "type": "string"
+                  },
+                  "start_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "end_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "applicable_products": {
+                    "type": "string"
+                  },
+                  "discount_value": {
+                    "type": "integer"
+                  },
+                  "terms_and_conditions": {
+                    "type": "string"
+                  },
+                  "offer_status": {
+                    "type": "string"
+                  },
+                  "claimed_count": {
+                    "type": "integer"
+                  },
+                  "offer_channel": {
+                    "type": "string"
+                  },
+                  "promo_code": {
+                    "type": "string"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Offer created successfully"
+          },
+          "400": {
+            "description": "Invalid input data"
           },
           "500": {
             "description": "Server error"
